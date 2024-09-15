@@ -7,7 +7,7 @@ late Database database;
 
 Future<void> createDatabase()async{
   var databasePath = await getDatabasesPath();
-  String path = join(databasePath, 'todo.db');
+  String path = join(databasePath, 'todos.db');
 
 
   // open the database

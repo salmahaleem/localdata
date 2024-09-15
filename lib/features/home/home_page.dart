@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
-  Future<void> delteTask(int id) async {
+  Future<void> deleteTask(int id) async {
     await UpdateStatus(id);
     await deleteDataBase(id);
     await getTask();
@@ -114,15 +114,48 @@ class _HomePageState extends State<HomePage> {
                           ),
                       ),
                       Container(
-                        child:ListView.builder(
-                            itemCount: tasks.length,
-                            itemBuilder:(context,index){
-                              return TodoCard(title: tasks[index]['title'] ?? '',
-                                time: tasks[index]['time'] ?? '',
-                                dis: tasks[index]['dis'] ?? '',
-                                date: tasks[index]['date'] ?? '',
-                                onDelete: ()=> deleteDataBase(tasks[index]['id']),);
-                            } ),
+                          height: 100,
+                          width: 100,
+                          child:tasks.isEmpty
+                              ? Center(
+                            child: Text("No Tasks",style: TextStyle(color: Color(0xFF7e64ff),fontSize: 25),),
+                          )
+                          :Container(
+                            height: 200,
+                            width: double.maxFinite,
+                            color: Color(0xFF7e64ff),
+                            child: Column(
+                                children: [
+                                   ListView.builder(
+                                      itemCount: tasks.length,
+                                      itemBuilder:(context,index){
+                                        return TodoCard(
+                                          title: tasks[index]['title'] ?? '',
+                                          time: tasks[index]['time'] ?? '',
+                                          dis: tasks[index]['dis'] ?? '',
+                                          date: tasks[index]['date'] ?? '',
+                                          onDelete: ()=> deleteTask(tasks[index]['id']),);
+                                      } ),
+                                 ],
+                            ),
+                          )),
+                      // tasks.isEmpty
+                      //       ? Center(
+                      //     child: Text("no tasks"),
+                      //   )
+                      // : Column(
+                      //    children: [
+                      //      ListView.builder(
+                      //         itemCount: tasks.length,
+                      //         itemBuilder:(context,index){
+                      //           return TodoCard(title: tasks[index]['title'] ?? '',
+                      //             time: tasks[index]['time'] ?? '',
+                      //             dis: tasks[index]['dis'] ?? '',
+                      //             date: tasks[index]['date'] ?? '',
+                      //             onDelete: ()=> deleteDataBase(tasks[index]['id']),);
+                      //         } ),
+                      //    ],
+                      //  ),
                         // child: Column(
                         //     children: [
                         //       TextFormField(
@@ -151,7 +184,6 @@ class _HomePageState extends State<HomePage> {
                         //           } ),
                         //     ],
                         //   ),
-                      ),
                     ],
                   ),
                 ),
@@ -163,8 +195,22 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF7e64ff),
         shape: CircleBorder(),
-        onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskPage()));},
-        child:Icon(Icons.add,color: Colors.white,) ,),
+        child:Icon(Icons.add,color: Colors.white,),
+        onPressed: () async{
+          final re = await Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskPage()));
+          if(re != null){
+            setState(() {
+              insertDataBase(
+                title: re['title'],
+                dis: re['dis'],
+                time: re['time'],
+                date: re['date'],
+              );
+            });
+            await getTask();
+          }
+          },
+         ),
     );
   }
 }
