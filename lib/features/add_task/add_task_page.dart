@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:localdata_app/core/provider_task.dart';
+import 'package:provider/provider.dart';
 
 import '../../constant.dart';
 
@@ -12,8 +14,18 @@ class AddTaskPage extends StatefulWidget{
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    disController.dispose();
+    timeController.dispose();
+    dateController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+    final taskProvider = Provider.of<TaskProvider>(context);
     return Scaffold(
       backgroundColor: Color(0xFF180e2b),
       appBar: AppBar(
@@ -151,16 +163,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
                  child: ElevatedButton(onPressed: (){
                    setState(() {
                      if(formKey.currentState!.validate()){
-                       Navigator.pop(context,{
-                         "title": titleController.text,
-                         "dis":  disController.text,
-                         "time": timeController.text,
-                         "date": dateController.text,
-                       });
-                       print("done");
+                       taskProvider.addTask(titleController.text, disController.text, timeController.text, dateController.text);
+                       Navigator.push(context,MaterialPageRoute(builder: (context)=>AddTaskPage()));
+                       print("done00000000000000000000000000");
                      }
                    });
-                 }, child: Text("ADD",style: TextStyle(fontSize: 25,color: Color(0xFF281155),fontWeight: FontWeight.bold))),
+                 }, child: Text("ADD Task",style: TextStyle(fontSize: 25,color: Color(0xFF281155),fontWeight: FontWeight.bold))),
                )
              ],
            ),

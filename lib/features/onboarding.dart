@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:localdata_app/features/login_sginup/login_page.dart';
 
 import 'home/home_page.dart';
 
@@ -31,7 +32,7 @@ class OnBoardingPage extends StatelessWidget{
            Text("Organize your time with TO DO",style: TextStyle(fontSize: 30,color: Colors.white),),
            SizedBox(height: 150,),
            ElevatedButton(onPressed: (){
-             Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(),));
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage(),));
            }, child: Text("START",style: TextStyle(fontSize: 20,color: Color(0xFF281155),fontWeight: FontWeight.bold)))
          ],
        ),
