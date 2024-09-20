@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget{
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  final formKeyL = GlobalKey<FormState>();
   final Shared sh = Shared();
 
   @override
@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Color(0xFF180e2b),
       body: Form(
-        key: formKeys,
+        key: formKeyL,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(onPressed: () {
-                    if (formKeys.currentState!.validate()) {
+                    if (formKeyL.currentState!.validate()) {
                       setState(() {
                           Shared.setData(key: 'username', value: nameController);
                           Navigator.pushReplacement(context, MaterialPageRoute(

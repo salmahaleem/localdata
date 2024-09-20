@@ -16,7 +16,9 @@ String title = "";
 String dis = "";
 String time = "";
 String date = "";
-
-final formKeys=GlobalKey<FormState>();
-//var scaffoldKey= GlobalKey<ScaffoldState>();
-final formKey=GlobalKey<FormState>();
+//
+// final formKeys=GlobalKey<FormState>();
+// final formKeysS=GlobalKey<FormState>();
+//
+// //var scaffoldKey= GlobalKey<ScaffoldState>();
+// final formKey=GlobalKey<FormState>();

@@ -5,6 +5,7 @@ import 'package:localdata_app/core/provider_task.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant.dart';
+import '../home/widgets/note.dart';
 
 class AddTaskPage extends StatefulWidget{
    AddTaskPage({super.key});
@@ -14,6 +15,7 @@ class AddTaskPage extends StatefulWidget{
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -161,13 +163,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                Container(
                  width: double.infinity,
                  child: ElevatedButton(onPressed: (){
-                   setState(() {
                      if(formKey.currentState!.validate()){
                        taskProvider.addTask(titleController.text, disController.text, timeController.text, dateController.text);
-                       Navigator.push(context,MaterialPageRoute(builder: (context)=>AddTaskPage()));
+                       Navigator.pop(context);
                        print("done00000000000000000000000000");
                      }
-                   });
                  }, child: Text("ADD Task",style: TextStyle(fontSize: 25,color: Color(0xFF281155),fontWeight: FontWeight.bold))),
                )
              ],

@@ -14,7 +14,9 @@ class Note extends StatelessWidget{
 
     if (taskProvider.tasks.isEmpty) {
       return const Center(
-        child: Text("Welcome, add your task"),
+        child:Scaffold(
+          backgroundColor: Color(0xFF180e2b),
+          body:Text("Welcome, add your task",style: TextStyle(color: Colors.white,fontSize: 20),),)
       );
     }
     return Column(

@@ -2,16 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant.dart';
+import '../../core/shared.dart';
 
-class SignupPage extends StatelessWidget{
+class SignupPage extends StatefulWidget{
   const SignupPage({super.key});
 
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final formKeyS = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: Color(0xFF180e2b),
       body: Form(
-        key: formKeys,
+        key: formKeyS,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -119,7 +126,7 @@ class SignupPage extends StatelessWidget{
                 SizedBox(height: 100,),
                 Container(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: (){}
+                  child: ElevatedButton(onPressed: () {}
                       , child: Text("SIGN UP",style: TextStyle(fontSize: 25,color: Color(0xFF281155),fontWeight: FontWeight.bold))),
                 ),
                 const SizedBox(height: 30,),
@@ -160,5 +167,4 @@ class SignupPage extends StatelessWidget{
       ),
     );
   }
-
 }

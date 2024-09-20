@@ -136,20 +136,22 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             height: 200,
                             width: double.maxFinite,
-                            child:TextFormField(
-                            decoration:
-                            InputDecoration(
-                                filled: true,
-                                fillColor: Color(0xFFccc2fe),
-                                hintText: "Search note",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                prefixIcon: Icon(Icons.search,color: Colors.grey,),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0xFFccc2fe),),
-                                  borderRadius: BorderRadius.circular(20),
-                                )
-                            ),
-                          ),)
+                            child: Note(),
+                          //   child:TextFormField(
+                          //   decoration:
+                          //   InputDecoration(
+                          //       filled: true,
+                          //       fillColor: Color(0xFFccc2fe),
+                          //       hintText: "Search note",
+                          //       hintStyle: TextStyle(color: Colors.grey),
+                          //       prefixIcon: Icon(Icons.search,color: Colors.grey,),
+                          //       border: OutlineInputBorder(
+                          //         borderSide: BorderSide(color: Color(0xFFccc2fe),),
+                          //         borderRadius: BorderRadius.circular(20),
+                          //       )
+                          //   ),
+                          // ),
+                             )
                         ],
                       ),
                     ),
