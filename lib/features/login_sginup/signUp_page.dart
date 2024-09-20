@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:localdata_app/features/login_sginup/login_page.dart';
 
 import '../../constant.dart';
 import '../../core/shared.dart';
@@ -126,7 +127,9 @@ class _SignupPageState extends State<SignupPage> {
                 SizedBox(height: 100,),
                 Container(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: () {}
+                  child: ElevatedButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                  }
                       , child: Text("SIGN UP",style: TextStyle(fontSize: 25,color: Color(0xFF281155),fontWeight: FontWeight.bold))),
                 ),
                 const SizedBox(height: 30,),

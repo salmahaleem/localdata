@@ -152,8 +152,8 @@ static dynamic getData({required String key}){
    return sharedPreferences.get(key);
   }
 
-static void deleteData({required String key}){
-   sharedPreferences.remove(key);
+static Future<void> deleteData()async{
+  await sharedPreferences.remove;
   }
 
  }

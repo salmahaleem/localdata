@@ -2,14 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localdata_app/features/home/profile.dart';
 import 'package:localdata_app/features/home/widgets/note.dart';
-import 'package:localdata_app/features/home/widgets/todo_card.dart';
-import 'package:popover/popover.dart';
+import 'package:localdata_app/features/login_sginup/login_page.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-import '../../constant.dart';
+import 'package:localdata_app/core/provider_task.dart';
 import '../../core/local_data.dart';
-import '../../core/provider_task.dart';
 import '../../core/shared.dart';
 import '../add_task/add_task_page.dart';
 
@@ -21,6 +19,8 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
+  String? _name ;
+  TaskProvider taskProvider = TaskProvider();
 
   @override
   void initState() {
@@ -31,10 +31,26 @@ class _HomePageState extends State<HomePage> {
   Future<void> initDb() async {
     await createDatabase();
     await Provider.of<TaskProvider>(context, listen: false).loadTask();
+    loadName();
+  }
+
+  Future<void>loadName()async{
+    String? name = Shared.getData(key: 'username');
+    setState(() {
+      _name = name;
+    });
+  }
+
+  void _logout() async {
+    await taskProvider.deleteAllTask();
+    await Shared.deleteData();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
   }
   @override
   Widget build(BuildContext context) {
-    String name = "${Shared.getData(key: 'username')}";
     return Scaffold(
       backgroundColor: Color(0xFF180e2b),
       appBar: AppBar(
@@ -57,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                          print("dark");
                        }
                        if(value == 3){
-                         print("logout");
+                         _logout();
                        }
                       });},
                       color: Colors.white,
@@ -79,7 +95,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  Text("Welcome $name",style: TextStyle(color: Colors.white,fontSize: 15),),
+                  Text("Welcome $_name",style: TextStyle(color: Colors.white,fontSize: 15),),
                   const SizedBox(height: 20),
                   Center(
                     child: Container(

@@ -11,7 +11,7 @@ Future<void> createDatabase()async{
 
 
   // open the database
-  database = await openDatabase(path, version: 2,
+  database = await openDatabase(path, version: 1,
       //create
       onCreate: (Database db, int version) async {
         // When creating the db, create the table
@@ -23,7 +23,7 @@ Future<void> createDatabase()async{
       },
       onOpen: (database) {
         print("open table");
-        //getDataBase(database);
+
       });
 }
 Future<void> insertDataBase(
@@ -35,9 +35,9 @@ Future<void> insertDataBase(
     })async {
    await database.transaction((txn) async {
     await txn.rawInsert(
-        'INSERT INTO Todo(title,dis, time, date,status) VALUES($title,$dis, $time, $date,"NotDone")');
+        'INSERT INTO Todo(title,dis, time, date,status) VALUES($title, $dis, $time, $date,"NotDone")');
     print("inserted");
-     // getDataBase(database);
+
   });
 }
 Future<void>UpdateDataBase(int id)async {
@@ -45,7 +45,6 @@ Future<void>UpdateDataBase(int id)async {
       'UPDATE Todo SET title = ?, dis = ?, time = ? ,date = ? WHERE id = ?',
       ['title','dis', 'time', 'date','status']);
     print("value is update");
-    //getDataBase(database);
 
 }
 Future<void>UpdateStatus(int id)async {
@@ -53,13 +52,11 @@ Future<void>UpdateStatus(int id)async {
       'UPDATE Todo SET status = ? WHERE id = ?',
       ['status',id]);
     print("status is done");
-    //getDataBase(database);
 }
 Future<void>deleteDataBase(int id)async {
  await database.rawDelete(
       'DELETE FROM Todo WHERE id = ?', ['id']);
        print("value deleted");
-    //getDataBase(database);
 }
 Future<List<Map<String,dynamic>>>getDataBase()async{
  return await  database.rawQuery('SELECT * FROM Todo');

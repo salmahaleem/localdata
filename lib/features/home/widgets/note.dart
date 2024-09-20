@@ -26,8 +26,8 @@ class Note extends StatelessWidget{
                 itemBuilder:(context,index){
                   return TodoCard(
                     title: taskProvider.tasks[index]['title'] ?? '',
-                    time: taskProvider.tasks[index]['time'] ?? '',
                     dis: taskProvider.tasks[index]['dis'] ?? '',
+                    time: taskProvider.tasks[index]['time'] ?? '',
                     date: taskProvider.tasks[index]['date'] ?? '',
                     onDelete: ()=> taskProvider.deleteTask(taskProvider.tasks[index]['id']),);
                 } ),

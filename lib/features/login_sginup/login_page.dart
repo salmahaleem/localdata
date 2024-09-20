@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget{
 
 class _LoginPageState extends State<LoginPage> {
   final formKeyL = GlobalKey<FormState>();
-  final Shared sh = Shared();
+
 
   @override
   void initState() {
@@ -99,8 +99,9 @@ class _LoginPageState extends State<LoginPage> {
                     if (formKeyL.currentState!.validate()) {
                       setState(() {
                           Shared.setData(key: 'username', value: nameController);
+                          Shared.setData(key: 'password', value: passwordController);
                           Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (context) => Profile()));
+                              builder: (context) => HomePage()));
                       });}},
                      child: Text("LOGIN",style: TextStyle(fontSize: 25,color: Color(0xFF281155),fontWeight: FontWeight.bold))),),
                 const SizedBox(height: 30,),
